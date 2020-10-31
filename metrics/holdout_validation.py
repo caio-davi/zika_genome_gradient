@@ -15,7 +15,7 @@ import sklearn.neighbors
 from sklearn.metrics import accuracy_score
 from sklearn.metrics.classification import confusion_matrix
 import numpy as np
-from plot_roc_curve import plot_roc_curve
+# from plot_roc_curve import plot_roc_curve
 
 x_train = np.load("../data_splits/x_train.npy")
 x_test = np.load("../data_splits/x_test.npy")
