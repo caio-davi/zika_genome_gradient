@@ -9,25 +9,61 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics.classification import confusion_matrix
 import numpy as np
 
+from decimal import Decimal
+
+
+def write_on_file(text, path="../results/bolstered_results.md", end_section=False):
+    with open(path, "w") as file_object:
+        file_object.write(text)
+        file_object.write("\n")
+
+
+def matrix2string(confMatrix):
+    m = " | | 0 | 1 \n"
+    m += " -- | -- | -- \n"
+    m += "0 |" + str(confMatrix[0][0]) + " | " + str(confMatrix[0][1]) + "\n"
+    m += "1 |" + str(confMatrix[1][0]) + " | " + str(confMatrix[1][1]) + "\n"
+    m += "\n"
+    return m
+
+
 X = np.load("../data_splits/x_bolstered.npy")
 y = np.load("../data_splits/y_bolstered.npy")
 
-model0 = [LogisticRegression(
-    random_state=0, solver='lbfgs', multi_class='multinomial'), "Logistic Regression"]
-model1 = [sklearn.neighbors.KNeighborsClassifier(n_neighbors=1), 'KNN']
-model2 = [tree.DecisionTreeClassifier(), 'Decision Tree']
-model3 = [svm.SVC(kernel='rbf', probability=True), 'SVM-RBF Kernel']
-model4 = [svm.SVC(kernel='linear', probability=True), 'SVM-Linear Kernel']
-models = [model0, model1, model2, model3, model4]
+
+models = [
+    {"name": "Logistic Regression ", "model": LogisticRegression(
+        random_state=0, solver='lbfgs', multi_class='multinomial')},
+    {"name": "KNN", "model":
+        sklearn.neighbors.KNeighborsClassifier(n_neighbors=1)},
+    {"name": "Decision Tree", "model":
+        tree.DecisionTreeClassifier()},
+    {"name": "SVM-RBF Kernel",
+        "model": svm.SVC(kernel='rbf', probability=True)},
+    {"name": "SVM-Linear Kernel",
+        "model": svm.SVC(kernel='linear', probability=True)},
+]
+
+
+to_file = "## Bolstered Resubstituition  Accuracy\n"
 
 for m in models:
-    model = m[0]
-    model.fit(X, y)
-    y_predicted = model.predict(X)
+    to_file += " " + m["name"] + " |"
+
+to_file += "\n"
+for i in range(len(models)):
+    to_file += "--- |"
+
+to_file += "\n"
+
+cf = "\n\n ### Confusion Matrix \n"
+for m in models:
+    m["model"].fit(X, y)
+    y_predicted = m["model"].predict(X)
     accuracy = accuracy_score(y, y_predicted)
-    print("\n\n")
-    print("====================================")
-    print(m[1])
-    print("Accuracy = ", accuracy)
-    print(confusion_matrix(y, y_predicted))
-    print("====================================")
+    to_file += str(accuracy) + " | "
+    cf += "\n\n " + "##### " + m["name"] + "\n"
+    cf += matrix2string(confusion_matrix(y, y_predicted))
+
+to_file += cf
+write_on_file(to_file)
