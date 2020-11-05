@@ -1,42 +1,47 @@
-## Bolstered Resubstituition Accuracy
+## Bolstered Resubstituition  Accuracy
+ Logistic Regression  | KNN | Decision Tree | SVM-RBF Kernel | SVM-Linear Kernel |
+--- |--- |--- |--- |--- |
+0.9776884920634921 | 1.0 | 1.0 | 0.9952678571428571 | 0.9783630952380953 | 
 
-| Logistic Regression | KNN | Decision Tree | SVM-RBF Kernel     | SVM-Linear Kernel |
-| ------------------- | --- | ------------- | ------------------ | ----------------- |
-| 0.9768849206349206  | 1.0 | 1.0           | 0.9929563492063492 | 0.977579365079365 |
+ ### Confusion Matrix 
 
-### Confusion Matrix
 
-##### Logistic Regression
+ ##### Logistic Regression 
+ | | 0 | 1 
+ -- | -- | -- 
+0 |65281 | 819
+1 |1430 | 33270
 
-|     | 0    | 1    |
-| --- | ---- | ---- |
-| 0   | 6526 | 84   |
-| 1   | 149  | 3321 |
 
-##### KNN
 
-|     | 0    | 1    |
-| --- | ---- | ---- |
-| 0   | 6610 | 0    |
-| 1   | 0    | 3470 |
+ ##### KNN
+ | | 0 | 1 
+ -- | -- | -- 
+0 |66100 | 0
+1 |0 | 34700
 
-##### Decision Tree
 
-|     | 0    | 1    |
-| --- | ---- | ---- |
-| 0   | 6610 | 0    |
-| 1   | 0    | 3470 |
 
-##### SVM-RBF Kernel
+ ##### Decision Tree
+ | | 0 | 1 
+ -- | -- | -- 
+0 |66100 | 0
+1 |0 | 34700
 
-|     | 0    | 1    |
-| --- | ---- | ---- |
-| 0   | 6599 | 11   |
-| 1   | 60   | 3410 |
 
-##### SVM-Linear Kernel
 
-|     | 0    | 1    |
-| --- | ---- | ---- |
-| 0   | 6539 | 71   |
-| 1   | 155  | 3315 |
+ ##### SVM-RBF Kernel
+ | | 0 | 1 
+ -- | -- | -- 
+0 |66047 | 53
+1 |424 | 34276
+
+
+
+ ##### SVM-Linear Kernel
+ | | 0 | 1 
+ -- | -- | -- 
+0 |65389 | 711
+1 |1470 | 33230
+
+

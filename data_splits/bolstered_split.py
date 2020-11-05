@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import random
 
-BOLSTER_MULTIPLIER = 10
+BOLSTER_MULTIPLIER = 100
 
 
 def getSigmas(df):
